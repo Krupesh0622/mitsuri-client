@@ -7,6 +7,8 @@ const initialState = {
   authData: storage.get("user") || {},
   authToken: storage.get("token") || "",
 
+  layoutProvider: "ent-provider",
+
   // Error state
   errorData: {
     show: false,
@@ -34,6 +36,9 @@ const globalSlice = createSlice({
       if (action.payload) {
         storage.set("token", action.payload);
       }
+    },
+    setLayoutProvider(state, action) {
+      state.layoutProvider = action.payload;
     },
   },
 });
@@ -109,6 +114,7 @@ export const verifyToken = (token) => async (dispatch) => {
   }
 };
 
-export const { setAuthData, setErrorData, setAuthToken } = globalSlice.actions;
+export const { setAuthData, setErrorData, setAuthToken, setLayoutProvider } =
+  globalSlice.actions;
 
 export default globalSlice.reducer;
