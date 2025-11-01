@@ -3,6 +3,7 @@ import "./App.css";
 import LayoutProvider from "./component/LayoutProvider/layout-provider";
 import { setLayoutProvider } from "./store/globalSlice";
 import { useState } from "react";
+import UserRoute from "./router/userRoutes/UserRoute";
 
 function App() {
   const [isLayoutChange, setIsLayoutChange] = useState(false);
@@ -20,14 +21,7 @@ function App() {
   };
   return (
     <div className="app">
-      <LayoutProvider>
-        <div>
-          <div>{layoutProvider}</div>
-          <div>
-            <button onClick={LayoutChange}>change layout</button>
-          </div>
-        </div>
-      </LayoutProvider>
+      <UserRoute />
     </div>
   );
 }

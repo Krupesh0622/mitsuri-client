@@ -1,0 +1,7 @@
+.Interaction-container {
+  width: 50%;
+  min-width: min(800px, 100%);
+  /* border: 1px solid black; */
+  /* height: 100%; */
+  padding: 10px 20px;
+}

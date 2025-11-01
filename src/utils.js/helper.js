@@ -1,6 +1,7 @@
 // import { twMerge } from "tailwind-merge";
 // import clsx from "clsx";
 import CryptoJS from "crypto-js";
+import { Color, Solver } from "./color";
 
 // export function cn(...inputs) {
 //   return twMerge(clsx(inputs));
@@ -47,4 +48,29 @@ export const decrypt = (encryptedData) => {
     console.warn("Decryption error:", error);
     return null;
   }
+};
+
+export const hexToRgb = (hex) => {
+  // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
+  const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+  hex = hex.replace(shorthandRegex, (m, r, g, b) => {
+    return r + r + g + g + b + b;
+  });
+
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  return result
+    ? [
+        parseInt(result[1], 16),
+        parseInt(result[2], 16),
+        parseInt(result[3], 16),
+      ]
+    : null;
+};
+
+export const creteImgFilter = (hex) => {
+  const rgb = hexToRgb(hex);
+  const color = new Color(rgb[0], rgb[1], rgb[2]);
+  const solver = new Solver(color);
+  const result = solver.solve();
+  return result?.filter;
 };

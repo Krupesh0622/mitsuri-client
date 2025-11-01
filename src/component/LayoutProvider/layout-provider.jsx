@@ -1,16 +1,18 @@
 import { useSelector } from "react-redux";
 import "./layout-provider.css";
-import Sidebar from "./Sidebar";
-function LayoutProvider({ children }) {
-  // const { layoutProvider } = useSelector((state) => state.global);
-  const { layoutProvider } = useSelector((state) => state.global);
-
+import EnterpriseSidebar from "./EnterpriseSidebar";
+function LayoutProvider({ layout, breadcrumb, children, path }) {
   return (
     <div className="layout-provider-component">
       <div className="sidebar">
-        <Sidebar />
+        <EnterpriseSidebar path={path} />
       </div>
-      <div className="right-bar">{children}</div>
+      <div className="right-bar">
+        <div className="header-container">
+          <h1 className="header-title">{breadcrumb.title}</h1>
+        </div>
+        <div className="app-container quid-scroll">{children}</div>
+      </div>
     </div>
   );
 }
